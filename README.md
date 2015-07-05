@@ -1,4 +1,4 @@
-# number-to-british-words-java
+# Number to words transformation (British edition)
 
 # Introduction
 This is a small programming challenge, written in Java. The task is simple: Transform a number into (british) words.
