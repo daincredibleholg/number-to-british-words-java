@@ -3,6 +3,8 @@ package net.h0lg.java.tests.number2words.transform;
 import net.h0lg.java.tests.number2words.BoundaryChecker;
 import net.h0lg.java.tests.number2words.helper.StringFormatHelper;
 
+import java.text.DecimalFormat;
+
 /**
  * Main converter implementation.
  *
@@ -51,6 +53,8 @@ public class Number2WordsConverter {
     public static String convert(int value) {
         // Ensure value is within boundaries.
         BoundaryChecker.checkBoundaries(value);
+
+        String valueAsString = StringFormatHelper.zeroPadNumber(value);
 
         String result = convertLessThanOneThousand(value);
 

@@ -1,12 +1,18 @@
 package net.h0lg.java.tests.number2words.helper;
 
+import net.h0lg.java.tests.number2words.BoundaryChecker;
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 /**
  * Checks the StringFormatHelper is functioning as expected.
  */
 public class StringFormatHelperTest {
+
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
 
     @Test
     public void addASpaceBeforeGivenValue () {
@@ -38,6 +44,36 @@ public class StringFormatHelperTest {
         String stringToAdd = " this can't get added ";
         String expected = givenValue;
         checkAddBeforeIfNotEmptyWith(givenValue, stringToAdd, expected);
+    }
+
+    @Test
+    public void zeroPaddingForSmallValueWorks () {
+        int givenValue = 42;
+        String expected = "000000042";
+
+        String actual = StringFormatHelper.zeroPadNumber(givenValue);
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void zeroPaddingForBiggerValueWorks () {
+        int givenValue = 123456;
+        String expected = "000123456";
+
+        String actual = StringFormatHelper.zeroPadNumber(givenValue);
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void lowerBoundaryValueThrowsExceptionForZeroPadding() {
+        expectedException.expect(IllegalArgumentException.class);
+        StringFormatHelper.zeroPadNumber(BoundaryChecker.LOWER_BOUNDARY);
+    }
+
+    @Test
+    public void upperBoundaryExceedingValueThrowsExceptionForZeroPadding() {
+        expectedException.expect(IllegalArgumentException.class);
+        StringFormatHelper.zeroPadNumber(BoundaryChecker.UPPER_BOUNDARY + 1);
     }
 
     private void checkAddBeforeIfNotEmptyWith(String givenValue, String stringToAdd, String expectedResult) {
