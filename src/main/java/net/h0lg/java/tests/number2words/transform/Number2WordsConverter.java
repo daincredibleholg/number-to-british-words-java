@@ -5,7 +5,7 @@ package net.h0lg.java.tests.number2words.transform;
  *
  * The only public method takes a number and converts it into
  * the british word representation.
- * 
+ *
  */
 public class Number2WordsConverter {
 
