@@ -1,4 +1,4 @@
-package net.h0lg.java.tests.number2words.number2words;
+package net.h0lg.java.tests.number2words;
 
 
 /**
