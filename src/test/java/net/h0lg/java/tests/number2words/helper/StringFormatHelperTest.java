@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * Created by holgersteinhauer on 05/07/15.
+ * Checks the StringFormatHelper is functioning as expected.
  */
 public class StringFormatHelperTest {
 
@@ -13,10 +13,7 @@ public class StringFormatHelperTest {
         String givenValue = "test";
         String stringToAdd = " ";
         String expected = stringToAdd + givenValue;
-
-        String actual = StringFormatHelper.addBeforeIfNotEmpty(givenValue, stringToAdd);
-
-        Assert.assertEquals(expected, actual);
+        checkAddBeforeIfNotEmptyWith(givenValue, stringToAdd, expected);
     }
 
     @Test
@@ -24,31 +21,27 @@ public class StringFormatHelperTest {
         String givenValue = "test";
         String stringToAdd = " and ";
         String expected = stringToAdd + givenValue;
-
-        String actual = StringFormatHelper.addBeforeIfNotEmpty(givenValue, stringToAdd);
-
-        Assert.assertEquals(expected, actual);
+        checkAddBeforeIfNotEmptyWith(givenValue, stringToAdd, expected);
     }
 
     @Test
-    public void doesNothingWithEmptyString () {
+    public void doesNothingWithEmptyString() {
         String givenValue = "";
         String stringToAdd = " this shouldn't get added ";
         String expected = givenValue;
-
-        String actual = StringFormatHelper.addBeforeIfNotEmpty(givenValue, stringToAdd);
-
-        Assert.assertEquals(expected, actual);
+        checkAddBeforeIfNotEmptyWith(givenValue, stringToAdd, expected);
     }
 
     @Test
-    public void returnsNullIfNullIsGiven () {
+    public void returnsNullIfNullIsGiven() {
         String givenValue = null;
         String stringToAdd = " this can't get added ";
         String expected = givenValue;
+        checkAddBeforeIfNotEmptyWith(givenValue, stringToAdd, expected);
+    }
 
+    private void checkAddBeforeIfNotEmptyWith(String givenValue, String stringToAdd, String expectedResult) {
         String actual = StringFormatHelper.addBeforeIfNotEmpty(givenValue, stringToAdd);
-
-        Assert.assertEquals(expected, actual);
+        Assert.assertEquals(expectedResult, actual);
     }
 }
