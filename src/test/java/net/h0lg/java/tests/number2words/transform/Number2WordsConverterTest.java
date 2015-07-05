@@ -1,5 +1,6 @@
 package net.h0lg.java.tests.number2words.transform;
 
+import net.h0lg.java.tests.number2words.BoundaryChecker;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
@@ -47,6 +48,12 @@ public class Number2WordsConverterTest {
     public void checkZeroIsNotProcessed() {
         expectedException.expect(IllegalArgumentException.class);
         Number2WordsConverter.convert(0);
+    }
+
+    @Test
+    public void checkUpperBoundaryExceedingNumbersAreNotProcessed() {
+        expectedException.expect(IllegalArgumentException.class);
+        Number2WordsConverter.convert(BoundaryChecker.UPPER_BOUNDARY + 1);
     }
 
     /**

@@ -1,5 +1,6 @@
 package net.h0lg.java.tests.number2words.transform;
 
+import net.h0lg.java.tests.number2words.BoundaryChecker;
 import net.h0lg.java.tests.number2words.helper.StringFormatHelper;
 
 /**
@@ -48,6 +49,9 @@ public class Number2WordsConverter {
     };
 
     public static String convert(int value) {
+        // Ensure value is within boundaries.
+        BoundaryChecker.checkBoundaries(value);
+
         String result = convertLessThanOneThousand(value);
 
         return result;
