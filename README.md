@@ -7,7 +7,7 @@ Numbers are expected to be positive and the maximum number supported is 999,999,
 # Prerequisites
 To get this application up and running, you need the following ingredients:
 * Java 8
-* Maven (tested with version 3.2.1)
+* Maven (tested with version 3.3.3)
 
 # Build status
 * Master branch: [![Build Status](https://travis-ci.org/daincredibleholg/number-to-british-words-java.svg?branch=master)](https://travis-ci.org/daincredibleholg/number-to-british-words-java)
