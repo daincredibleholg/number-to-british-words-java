@@ -3,14 +3,13 @@ package net.h0lg.java.tests.number2words.transform;
 import net.h0lg.java.tests.number2words.BoundaryChecker;
 import net.h0lg.java.tests.number2words.helper.StringFormatHelper;
 
-import java.text.DecimalFormat;
+import java.util.Map;
 
 /**
  * Main converter implementation.
  *
  * The only public method takes a number and converts it into
  * the british word representation.
- *
  */
 public class Number2WordsConverter {
 
@@ -54,14 +53,19 @@ public class Number2WordsConverter {
         // Ensure value is within boundaries.
         BoundaryChecker.checkBoundaries(value);
 
-        String valueAsString = StringFormatHelper.zeroPadNumber(value);
+        Map<NumberPartIdentifiers, Integer> numberParts = splitNumberToParts(value);
 
         String result = convertLessThanOneThousand(value);
 
         return result;
     }
 
-    private static String convertLessThanOneThousand (int number) {
+    private static Map<NumberPartIdentifiers, Integer> splitNumberToParts(int number) {
+        String valueAsString = StringFormatHelper.zeroPadNumber(number);
+        return null;
+    }
+
+    private static String convertLessThanOneThousand(int number) {
         String currentValue;
 
         if (number % 100 < 20) {
