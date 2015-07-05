@@ -20,7 +20,7 @@ public class StringFormatHelper {
      * @return The combination stringToAdd and value or value, if the above requirements are not met.
      */
     public static String addBeforeIfNotEmpty(String value, String stringToAdd) {
-        if (value == null || value.isEmpty()) {
+        if (value == null || value.isEmpty() || stringToAdd == null) {
             return value;
         }
 
@@ -28,17 +28,13 @@ public class StringFormatHelper {
     }
 
     /**
-     * Pads the given number with 0s if needed.
-     * The needed length correlates with BoundaryChecker.UPPER_BOUNDARY and can
-     * be read by using BoundaryChecker.UPPER_BOUNDARY_PADDING_MASK.
+     * Pads the given number with 0s if needed, but only up to the length defined via
+     * BoundaryChecker.UPPER_BOUNDARY_PADDING_MASK.
      *
      * @param number Number you need a 0-padded String representation for.
      * @return 0-padded String representation of number
      */
     public static String zeroPadNumber(int number) {
-        // check boundaries first
-        BoundaryChecker.checkBoundaries(number);
-
         String result;
         String mask = BoundaryChecker.UPPER_BOUNDARY_PADDING_MASK;
 
@@ -46,5 +42,20 @@ public class StringFormatHelper {
         result = decimalFormat.format(number);
 
         return result;
+    }
+
+    /**
+     * Same as addBeforeIfNotEmpty(String, String) but adds stringToAdd at the end of value.
+     *
+     * @param value The value you need another string appended to.
+     * @param stringToAdd What to append.
+     * @return The new concatenation of value and stringToAdd or value, if empty or null
+     */
+    public static String addAfterIfNotEmpty(String value, String stringToAdd) {
+        if (value == null || value.isEmpty() || stringToAdd == null) {
+            return value;
+        }
+
+        return value + stringToAdd;
     }
 }

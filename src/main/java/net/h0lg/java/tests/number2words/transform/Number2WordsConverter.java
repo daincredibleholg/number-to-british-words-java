@@ -1,6 +1,7 @@
 package net.h0lg.java.tests.number2words.transform;
 
 import net.h0lg.java.tests.number2words.BoundaryChecker;
+import net.h0lg.java.tests.number2words.helper.NumberHelper;
 import net.h0lg.java.tests.number2words.helper.StringFormatHelper;
 
 import java.util.Map;
@@ -53,22 +54,34 @@ public class Number2WordsConverter {
         // Ensure value is within boundaries.
         BoundaryChecker.checkBoundaries(value);
 
-        Map<NumberPartIdentifiers, Integer> numberParts = splitNumberToParts(value);
+        Map<NumberPartIdentifiers, Integer> numberParts = NumberHelper.splitIntoParts(value);
 
-        String result = convertLessThanOneThousand(value);
-
+        String result = processNumberParts(numberParts);
         return result;
     }
 
-    private static Map<NumberPartIdentifiers, Integer> splitNumberToParts(int number) {
-        String valueAsString = StringFormatHelper.zeroPadNumber(number);
-        return null;
+    private static String processNumberParts(Map<NumberPartIdentifiers, Integer> numberParts) {
+        String result = "";
+
+        for (NumberPartIdentifiers part : NumberPartIdentifiers.values()) {
+            if (numberParts.get(part) > 0) {
+                result = StringFormatHelper.addBeforeIfNotEmpty(result, " ");
+                result += convertLessThanOneThousand(numberParts.get(part));
+                result = StringFormatHelper.addAfterIfNotEmpty(result, " " + part.getPartsStringRepresentation());
+            }
+        }
+
+        return result;
     }
 
     private static String convertLessThanOneThousand(int number) {
         String currentValue;
 
-        if (number % 100 < 20) {
+        if (number % 100 == 0) {
+            // edge case -> rest of 0 == one <whatever>
+            currentValue = NUMBER_NAMES[1];
+            number /= 100;
+        } else if (number % 100 < 20) {
             currentValue = NUMBER_NAMES[number % 100];
             number /= 100;
         } else {
@@ -80,6 +93,7 @@ public class Number2WordsConverter {
             currentValue = TENNER_NAMES[number % 10] + currentValue;
             number /= 10;
         }
+
         if (number == 0) return currentValue;
 
         currentValue = StringFormatHelper.addBeforeIfNotEmpty(currentValue, " and ");

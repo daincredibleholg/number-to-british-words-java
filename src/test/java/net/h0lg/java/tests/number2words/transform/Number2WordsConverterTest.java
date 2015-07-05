@@ -45,6 +45,19 @@ public class Number2WordsConverterTest {
     }
 
     @Test
+    public void checkOneThousandGetsConverted() {
+        int validInput = 1000;
+        String expected = "one thousand";
+        checkValidInput(validInput, expected);
+    }
+    @Test
+    public void checkOneThousandAndFortyTwoGetsConverted() {
+        int validInput = 1042;
+        String expected = "one thousand and forty two";
+        checkValidInput(validInput, expected);
+    }
+
+    @Test
     public void checkZeroIsNotProcessed() {
         expectedException.expect(IllegalArgumentException.class);
         Number2WordsConverter.convert(0);

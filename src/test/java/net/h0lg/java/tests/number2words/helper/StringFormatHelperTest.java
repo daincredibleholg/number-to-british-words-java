@@ -47,6 +47,14 @@ public class StringFormatHelperTest {
     }
 
     @Test
+    public void returnOriginalValueIfNullShouldBeAddedInFront () {
+        String givenValue = "perfectly fine string";
+        String stringToAdd = null;
+        String expected = givenValue;
+        checkAddBeforeIfNotEmptyWith(givenValue, stringToAdd, expected);
+    }
+
+    @Test
     public void zeroPaddingForSmallValueWorks () {
         int givenValue = 42;
         String expected = "000000042";
@@ -65,19 +73,46 @@ public class StringFormatHelperTest {
     }
 
     @Test
-    public void lowerBoundaryValueThrowsExceptionForZeroPadding() {
-        expectedException.expect(IllegalArgumentException.class);
-        StringFormatHelper.zeroPadNumber(BoundaryChecker.LOWER_BOUNDARY);
+    public void addAnAndAfterGivenValue () {
+        String givenValue = "test";
+        String stringToAdd = " and ";
+        String expected = givenValue + stringToAdd;
+        checkAddAfterIfNotEmptyWith(givenValue, stringToAdd, expected);
     }
 
     @Test
-    public void upperBoundaryExceedingValueThrowsExceptionForZeroPadding() {
-        expectedException.expect(IllegalArgumentException.class);
-        StringFormatHelper.zeroPadNumber(BoundaryChecker.UPPER_BOUNDARY + 1);
+    public void nothingGetsAddedToTheEndOfAnEmptyString() {
+        String givenValue = "";
+        String stringToAdd = " this shouldn't get added ";
+        String expected = givenValue;
+        checkAddAfterIfNotEmptyWith(givenValue, stringToAdd, expected);
+    }
+
+    @Test
+    public void tryToAddStringAtTheEndOfNullReturnsNull() {
+        String givenValue = null;
+        String stringToAdd = " this can't get added ";
+        String expected = givenValue;
+        checkAddAfterIfNotEmptyWith(givenValue, stringToAdd, expected);
+    }
+
+    @Test
+    public void addingNullToStringReturnsOriginalString() {
+        String givenValue = "non empty string";
+        String stringToAdd = null;
+        String expected = givenValue;
+        checkAddAfterIfNotEmptyWith(givenValue, stringToAdd, expected);
     }
 
     private void checkAddBeforeIfNotEmptyWith(String givenValue, String stringToAdd, String expectedResult) {
         String actual = StringFormatHelper.addBeforeIfNotEmpty(givenValue, stringToAdd);
         Assert.assertEquals(expectedResult, actual);
     }
+
+
+    private void checkAddAfterIfNotEmptyWith(String givenValue, String stringToAdd, String expectedResult) {
+        String actual = StringFormatHelper.addAfterIfNotEmpty(givenValue, stringToAdd);
+        Assert.assertEquals(expectedResult, actual);
+    }
+
 }
