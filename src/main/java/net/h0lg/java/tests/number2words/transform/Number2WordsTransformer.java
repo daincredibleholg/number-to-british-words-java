@@ -5,7 +5,30 @@ package net.h0lg.java.tests.number2words.transform;
  */
 public class Number2WordsTransformer {
 
+    private static final String[] NUMBER_NAMES = {
+            "",
+            "one",
+            "two",
+            "three",
+            "four",
+            "five",
+            "six",
+            "seven",
+            "eight",
+            "nine",
+            "ten",
+            "eleven",
+            "twelve",
+            "thirteen",
+            "fourteen",
+            "fifteen",
+            "sixteen",
+            "seventeen",
+            "eighteen",
+            "nineteen"
+    };
+
     public static String transform(int value) {
-        return "two";
+        return NUMBER_NAMES[value];
     }
 }

@@ -18,4 +18,13 @@ public class Number2WordsTransformerTest {
         Assert.assertEquals(expected, actual);
     }
 
+    @Test
+    public void anotherSmallPositiveNumberGetsTransformed () {
+        int validInput = 12;
+        String expected = "twelve";
+
+        String actual = Number2WordsTransformer.transform(validInput);
+
+        Assert.assertEquals(expected, actual);
+    }
 }
