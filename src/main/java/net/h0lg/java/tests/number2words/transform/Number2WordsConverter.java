@@ -1,5 +1,7 @@
 package net.h0lg.java.tests.number2words.transform;
 
+import net.h0lg.java.tests.number2words.helper.StringFormatHelper;
+
 /**
  * Main converter implementation.
  *
@@ -61,24 +63,15 @@ public class Number2WordsConverter {
             currentValue = NUMBER_NAMES[number % 10];
             number /= 10;
 
-            currentValue = addStringIfNotEmpty(currentValue, " ");
+            currentValue = StringFormatHelper.addBeforeIfNotEmpty(currentValue, " ");
 
             currentValue = TENNER_NAMES[number % 10] + currentValue;
             number /= 10;
         }
         if (number == 0) return currentValue;
 
-        currentValue = addStringIfNotEmpty(currentValue, " and ");
+        currentValue = StringFormatHelper.addBeforeIfNotEmpty(currentValue, " and ");
         return NUMBER_NAMES[number] + " hundred" + currentValue;
     }
 
-    private static String addStringIfNotEmpty(String value, String stringToAdd) {
-        String result = value;
-
-        if (!result.isEmpty()) {
-            result = stringToAdd + result;
-        }
-
-        return result;
-    }
 }

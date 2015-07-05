@@ -4,7 +4,9 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * Created by holgersteinhauer on 05/07/15.
+ * Tests the central implementation of this app - the converter logic from a given number
+ * to a british words representation.
+ * 
  */
 public class Number2WordsConverterTest {
 
