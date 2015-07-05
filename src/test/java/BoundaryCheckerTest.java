@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 /**
- * Created by holgersteinhauer on 05/07/15.
+ * Tests the boundary checks provided by BoundaryChecker
  */
 public class BoundaryCheckerTest {
 

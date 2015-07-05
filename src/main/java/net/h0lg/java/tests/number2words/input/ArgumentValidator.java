@@ -1,13 +1,13 @@
 package net.h0lg.java.tests.number2words.input;
 
+import net.h0lg.java.tests.number2words.BoundaryChecker;
+
 /**
  * Validator class for command line arguments.
  */
 public class ArgumentValidator {
 
     private static final int FAULTY_DEFAULT_VALUE = -1;
-    private static final int LOWER_BOUNDARY = 0;
-    private static final int UPPER_BOUNDARY = 999999999;
 
     /**
      * This method return an instance of UserInput with a valid value, if
@@ -26,7 +26,7 @@ public class ArgumentValidator {
             checkArguments(arguments);
 
             int value = Integer.parseInt(arguments[0]);
-            checkValueIsInRange(value);
+            BoundaryChecker.checkBoundaries(value);
 
             return new UserInput(value, false);
         } catch (IllegalArgumentException e) {
@@ -44,27 +44,6 @@ public class ArgumentValidator {
     private static void checkArguments(String[] arguments) throws IllegalArgumentException {
         if (arguments == null || arguments.length ==0 ||  arguments.length > 1) {
             throw new IllegalArgumentException("Only exact one argument is supported.");
-        }
-    }
-
-    /**
-     * Throws an IllegalArgumentException if
-     *  a) value <= LOWER_BOUNDARY or
-     *  b) value > UPPER_BOUNDARY.
-     *
-     * @param value Value to check
-     * @throws IllegalArgumentException
-     */
-    private static void checkValueIsInRange(int value) throws IllegalArgumentException {
-        if (value <= LOWER_BOUNDARY) {
-            throw new IllegalArgumentException(
-                    "Given value (" + value + ") is lower or equals the lower boundary (" + LOWER_BOUNDARY + ").");
-        }
-
-        if (value > UPPER_BOUNDARY) {
-            throw new IllegalArgumentException(
-                    "Given value (" + value +") is bigger than the upper boundary (" + UPPER_BOUNDARY +")."
-            );
         }
     }
 
