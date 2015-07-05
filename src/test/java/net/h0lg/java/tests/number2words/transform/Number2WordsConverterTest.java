@@ -58,6 +58,12 @@ public class Number2WordsConverterTest {
     }
 
     @Test
+    public void checkLargeNumberGetsConverted() {
+        int validInput = 56945781;
+        String expected = "fifty six million nine hundred and forty five thousand seven hundred and eighty one";
+    }
+
+    @Test
     public void checkZeroIsNotProcessed() {
         expectedException.expect(IllegalArgumentException.class);
         Number2WordsConverter.convert(0);

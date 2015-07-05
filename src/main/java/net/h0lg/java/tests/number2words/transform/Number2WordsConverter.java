@@ -64,10 +64,14 @@ public class Number2WordsConverter {
         String result = "";
 
         for (NumberPartIdentifiers part : NumberPartIdentifiers.values()) {
-            if (numberParts.get(part) > 0) {
-                result = StringFormatHelper.addBeforeIfNotEmpty(result, " ");
+            if (numberParts.get(part) > 1) {
+                result = StringFormatHelper.addAfterIfNotEmpty(result, " and ");
                 result += convertLessThanOneThousand(numberParts.get(part));
-                result = StringFormatHelper.addAfterIfNotEmpty(result, " " + part.getPartsStringRepresentation());
+                result = StringFormatHelper.addAfterIfNotEmpty(result, part.getPartsStringRepresentation());
+            } else if (numberParts.get(part) == 1) {
+                // one is a special case, we have to take care of
+                result += NUMBER_NAMES[1];
+                result = StringFormatHelper.addAfterIfNotEmpty(result, part.getPartsStringRepresentation());
             }
         }
 
@@ -77,11 +81,7 @@ public class Number2WordsConverter {
     private static String convertLessThanOneThousand(int number) {
         String currentValue;
 
-        if (number % 100 == 0) {
-            // edge case -> rest of 0 == one <whatever>
-            currentValue = NUMBER_NAMES[1];
-            number /= 100;
-        } else if (number % 100 < 20) {
+        if (number % 100 < 20) {
             currentValue = NUMBER_NAMES[number % 100];
             number /= 100;
         } else {
