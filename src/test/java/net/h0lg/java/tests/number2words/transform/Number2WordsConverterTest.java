@@ -1,14 +1,19 @@
 package net.h0lg.java.tests.number2words.transform;
 
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 /**
  * Tests the central implementation of this app - the converter logic from a given number
  * to a british words representation.
- * 
+ *
  */
 public class Number2WordsConverterTest {
+
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
 
     @Test
     public void checkOneGetsConverted () {
@@ -36,6 +41,12 @@ public class Number2WordsConverterTest {
         int validInput = 105;
         String expected = "one hundred and five";
         checkValidInput(validInput, expected);
+    }
+
+    @Test
+    public void checkZeroIsNotProcessed() {
+        expectedException.expect(IllegalArgumentException.class);
+        Number2WordsConverter.convert(0);
     }
 
     /**
