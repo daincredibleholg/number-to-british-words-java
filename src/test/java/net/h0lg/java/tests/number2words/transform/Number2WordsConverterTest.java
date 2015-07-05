@@ -6,7 +6,7 @@ import org.junit.Test;
 /**
  * Created by holgersteinhauer on 05/07/15.
  */
-public class Number2WordsTransformerTest {
+public class Number2WordsConverterTest {
 
     @Test
     public void checkOneGetsConverted () {
@@ -37,14 +37,14 @@ public class Number2WordsTransformerTest {
     }
 
     /**
-     * Checks if Number2WordsTransformer returns expectedOutput for given number
+     * Checks if Number2WordsConverter returns expectedOutput for given number
      * validInput.
      *
      * @param validInput Number to convert
-     * @param expectedOutput Expected result from Number2WordsTransformer.transform()
+     * @param expectedOutput Expected result from Number2WordsConverter.convert()
      */
     private void checkValidInput (int validInput, String expectedOutput) {
-        String actual = Number2WordsTransformer.transform(validInput);
+        String actual = Number2WordsConverter.convert(validInput);
         Assert.assertEquals(expectedOutput, actual);
     }
 }

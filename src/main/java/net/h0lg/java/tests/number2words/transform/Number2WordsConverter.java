@@ -1,9 +1,13 @@
 package net.h0lg.java.tests.number2words.transform;
 
 /**
- * Created by holgersteinhauer on 05/07/15.
+ * Main converter implementation.
+ *
+ * The only public method takes a number and converts it into
+ * the british word representation.
+ * 
  */
-public class Number2WordsTransformer {
+public class Number2WordsConverter {
 
     private static final String[] NUMBER_NAMES = {
             "",
@@ -41,7 +45,7 @@ public class Number2WordsTransformer {
             "ninety"
     };
 
-    public static String transform(int value) {
+    public static String convert(int value) {
         String result = convertLessThanOneThousand(value);
 
         return result;
@@ -57,18 +61,24 @@ public class Number2WordsTransformer {
             currentValue = NUMBER_NAMES[number % 10];
             number /= 10;
 
-            if (!currentValue.isEmpty()) {
-                currentValue = " " + currentValue;
-            }
+            currentValue = addStringIfNotEmpty(currentValue, " ");
 
             currentValue = TENNER_NAMES[number % 10] + currentValue;
             number /= 10;
         }
         if (number == 0) return currentValue;
 
-        if (!currentValue.isEmpty()) {
-            currentValue = " and " + currentValue;
-        }
+        currentValue = addStringIfNotEmpty(currentValue, " and ");
         return NUMBER_NAMES[number] + " hundred" + currentValue;
+    }
+
+    private static String addStringIfNotEmpty(String value, String stringToAdd) {
+        String result = value;
+
+        if (!result.isEmpty()) {
+            result = stringToAdd + result;
+        }
+
+        return result;
     }
 }
