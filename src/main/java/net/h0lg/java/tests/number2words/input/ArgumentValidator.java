@@ -1,4 +1,4 @@
-package net.h0lg.java.tests.number2words.tests.input;
+package net.h0lg.java.tests.number2words.input;
 
 /**
  * Created by holgersteinhauer on 05/07/15.
