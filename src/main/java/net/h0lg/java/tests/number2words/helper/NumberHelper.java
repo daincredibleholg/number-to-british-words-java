@@ -44,4 +44,20 @@ public class NumberHelper {
         return Integer.parseInt(numberAsZeroPaddedString.substring(startIndex, endIndex));
     }
 
+
+    /**
+     * Returns the int representation of the first element in the given array arguments.
+     * An empty or null argument causes an IllegalArgumentException and non-integer values
+     * will cause an implicit NumberFormatException (sub-class of IllegalArgumentException).
+     *
+     * @param arguments Array with arguments, you want the first element converted to int from.
+     * @return The converted first element
+     */
+    public static int getNumberFromFirstArgument(String[] arguments) {
+        if (arguments == null || arguments.length == 0) {
+            throw new IllegalArgumentException("Empty arguments are not supported.");
+        }
+
+        return Integer.parseInt(arguments[0]);
+    }
 }
