@@ -5,8 +5,14 @@ import net.h0lg.java.tests.number2words.helper.NumberHelper;
 import net.h0lg.java.tests.number2words.transform.Number2WordsConverter;
 
 /**
- * This class is just the entry point for the application
+ * This class is the entry point for the application
  *
+ * The application expects exactly one argument. This argument has to be
+ * a number. If a non-numeric or more than one argument is given a usage
+ * information gets displayed.
+ *
+ * Usage:
+ *   java -jar target/number2words.jar [<number>]
  */
 public class App 
 {

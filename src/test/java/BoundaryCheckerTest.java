@@ -1,5 +1,5 @@
-import org.junit.Assert;
 import net.h0lg.java.tests.number2words.BoundaryChecker;
+import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -23,7 +23,7 @@ public class BoundaryCheckerTest {
     }
 
     @Test
-    public void upperBoundaryIsInclusive () {
+    public void upperBoundaryIsInclusive() {
         int validValue = BoundaryChecker.UPPER_BOUNDARY;
         BoundaryChecker.checkBoundaries(validValue);
 

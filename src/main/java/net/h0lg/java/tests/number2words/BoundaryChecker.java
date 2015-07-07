@@ -1,8 +1,8 @@
 package net.h0lg.java.tests.number2words;
 
 /**
- * Provides boundary checks.
- *
+ * Provides boundary checks, lower (exclusive) and upper (inclusive)
+ * boundaries and the 0-padding mask for the upper boundary.
  */
 public class BoundaryChecker {
 
@@ -31,7 +31,7 @@ public class BoundaryChecker {
      * @param value Value to check
      * @throws IllegalArgumentException
      */
-    public static void checkBoundaries (int value) throws IllegalArgumentException {
+    public static void checkBoundaries(int value) throws IllegalArgumentException {
         if (value <= LOWER_BOUNDARY) {
             throw new IllegalArgumentException(
                     "Given value (" + value + ") comes below supported numbers. Value must be > " + LOWER_BOUNDARY);

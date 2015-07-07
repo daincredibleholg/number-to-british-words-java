@@ -8,7 +8,7 @@ import java.util.Map;
 
 /**
  * Main converter implementation.
- *
+ * <p/>
  * The only public method takes a number and converts it into
  * the british word representation.
  */
@@ -50,14 +50,25 @@ public class Number2WordsConverter {
             "ninety"
     };
 
-    public static String convert(int value) {
+    /**
+     * Converts the given number into its british word representation.
+     * The following requirements must be met:
+     * * number > BoundaryChecker.LOWER_BOUNDARY AND
+     * * number <= BoundaryChecker.UPPER_BOUNDARY
+     * <p/>
+     * If the given number violates these rules an IllegalArgumentException will
+     * be thrown.
+     *
+     * @param number Number to convert
+     * @return British word representation
+     */
+    public static String convert(int number) {
         // Ensure value is within boundaries.
-        BoundaryChecker.checkBoundaries(value);
+        BoundaryChecker.checkBoundaries(number);
 
-        Map<NumberPartIdentifiers, Integer> numberParts = NumberHelper.splitIntoParts(value);
+        Map<NumberPartIdentifiers, Integer> numberParts = NumberHelper.splitIntoParts(number);
 
-        String result = processNumberParts(numberParts);
-        return result;
+        return processNumberParts(numberParts);
     }
 
     private static String processNumberParts(Map<NumberPartIdentifiers, Integer> numberParts) {
@@ -65,7 +76,7 @@ public class Number2WordsConverter {
 
         for (NumberPartIdentifiers part : NumberPartIdentifiers.values()) {
             if (numberParts.get(part) > 1) {
-                result = StringFormatHelper.addAfterIfNotEmpty(result, " and ");
+                result = StringFormatHelper.addAfterIfNotEmpty(result, " ");
                 result += convertLessThanOneThousand(numberParts.get(part));
                 result = StringFormatHelper.addAfterIfNotEmpty(result, part.getPartsStringRepresentation());
             } else if (numberParts.get(part) == 1) {
@@ -73,10 +84,13 @@ public class Number2WordsConverter {
                 result += NUMBER_NAMES[1];
                 result = StringFormatHelper.addAfterIfNotEmpty(result, part.getPartsStringRepresentation());
             }
+
+
         }
 
         return result;
     }
+
 
     private static String convertLessThanOneThousand(int number) {
         String currentValue;
