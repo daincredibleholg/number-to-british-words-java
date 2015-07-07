@@ -53,7 +53,7 @@ public class Number2WordsConverterTest {
     @Test
     public void checkOneThousandAndFortyTwoGetsConverted() {
         int validInput = 1042;
-        String expected = "one thousand and forty two";
+        String expected = "one thousand forty two";
         checkValidInput(validInput, expected);
     }
 
@@ -61,6 +61,7 @@ public class Number2WordsConverterTest {
     public void checkLargeNumberGetsConverted() {
         int validInput = 56945781;
         String expected = "fifty six million nine hundred and forty five thousand seven hundred and eighty one";
+        checkValidInput(validInput, expected);
     }
 
     @Test

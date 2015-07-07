@@ -5,7 +5,7 @@ import net.h0lg.java.tests.number2words.BoundaryChecker;
 import java.text.DecimalFormat;
 
 /**
- * This helper class provides methods to manipulate String null safe.
+ * This helper class provides methods to "manipulate" Strings.
  *
  */
 public class StringFormatHelper {
