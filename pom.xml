@@ -4,7 +4,7 @@
 
     <groupId>net.h0lg.java.tests.number2words.tests</groupId>
     <artifactId>number2words</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <packaging>jar</packaging>
 
     <name>number2words</name>
