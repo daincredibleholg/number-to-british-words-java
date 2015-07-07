@@ -1,4 +1,17 @@
-language: java
+env:
+  global:
+   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+   #   via the "travis encrypt" command using the project repo's public key
+   - secure: "A4YQVApzudhT+8h0sIi3OfeBo/vNcXDA7YGjWTDshRlot7S+hxchvanwd46Bo5fxJmHc6np2xiZ7wIDjg/O8Dx3S0gmXFNMrxfJ95A7m9p4SU19nBnHVcYQ7K3Zha0CNVwO2w+VviDfBt4NJ9eX3JF28KNJxrJbdrlC7ImTRBpbCrBoCRfa9uUqgUvxPzbKxof05TYISJzSwZ5J58AxY91WSkI1hbv5TP1L6IPrO6vJHL8fxoHWl9QoxGJX8GwQWlfMlg4aRhGBWr6//ACAcvHTqG5l4jMaYIBXAlihjzPB/XrBqSVv9jpzeprdophrDHHob4+DUdqRc5/rAR5raxyALM3HfOk9hMl857G/AckTxfDMhzn0VMyf3o0w6b+fQs1JkB6WvHWBqzD6izeZ7yFakcmk2raIwqr0aosYIsKctzFbk2cQqxoLjYtUDp+pK7JCgc86uip6LDRBJDVWI0mo6fEkBvwXjJQ6k/Lz1+qMKwq7Oag9w4BmKMmBllFIgFTIRHKVuPavEvFbj4wYsaKKL2zUVjIu1OqfCs2LPaXxdsZ/EMmuWNg/M0nAMJEgskKFezN4xsKU4bMPneXeWeUR2PjK9HN7/msIEYiCLWV/Oqmpx8LzsGdfQ7TnPKLAd3pn/uzYq3LlqqPx6p82Ru5z8176+La6IRx0fvM9uELI="language: java
 jdk:
   - oraclejdk8
 services:
+addons:
+  coverity_scan:
+    project:
+      name: "daincredibleholg/number-to-british-words-java"
+      description: "Build submitted via Travis CI"
+    notification_email: holger+github@willige-entwickler.de
+    build_command_prepend: "mvn clean"
+    build_command:   "mvn -DskipTests=true compile"
+    branch_pattern: develop
