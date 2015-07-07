@@ -1,5 +1,6 @@
 package net.h0lg.java.tests.number2words.helper;
 
+import net.h0lg.java.tests.number2words.BoundaryChecker;
 import net.h0lg.java.tests.number2words.transform.NumberPartIdentifiers;
 import org.junit.Assert;
 import org.junit.Rule;
@@ -11,8 +12,6 @@ import java.util.Map;
 
 /**
  * Tests the NumberHelper implementation.
- *
- * Note: I skipped the boundary checks as they are done during 0-pad processing (see StringFormatHelper.zeroPadNumber()).
  */
 public class NumberHelperTest {
 
@@ -39,9 +38,26 @@ public class NumberHelperTest {
     }
 
     @Test
+    public void lowerBoundaryValueThrowsException() {
+        int lowerBoundary = BoundaryChecker.LOWER_BOUNDARY;
+
+        expectedException.expect(IllegalArgumentException.class);
+        NumberHelper.splitIntoParts(lowerBoundary);
+    }
+
+    @Test
+    public void upperBoundaryExceedingValueThrowsException() {
+        int toLargeValue = BoundaryChecker.UPPER_BOUNDARY + 1;
+
+        expectedException.expect(IllegalArgumentException.class);
+        NumberHelper.splitIntoParts(toLargeValue);
+    }
+
+
+    @Test
     public void validNumberAsOnlyElementInArray() {
         int expectedValue = 42;
-        String[] args = { Integer.toString(expectedValue) };
+        String[] args = {Integer.toString(expectedValue)};
 
         int actualValue = NumberHelper.getNumberFromFirstArgument(args);
 
@@ -51,7 +67,7 @@ public class NumberHelperTest {
     @Test
     public void anotherValidNumberAsOnlyElementInArray() {
         int expectedValue = 21;
-        String[] args = { Integer.toString(expectedValue) };
+        String[] args = {Integer.toString(expectedValue)};
 
         int actualValue = NumberHelper.getNumberFromFirstArgument(args);
 
@@ -59,7 +75,7 @@ public class NumberHelperTest {
     }
 
     @Test
-    public void emptyArgumentsShouldLeadToAnException () {
+    public void emptyArgumentsShouldLeadToAnException() {
         String[] emptyArgs = {};
 
         expectedException.expect(IllegalArgumentException.class);
@@ -70,7 +86,7 @@ public class NumberHelperTest {
     @Test
     public void firstElementReturnedEvenIfMultipleElementsAvailable() {
         int expectedValue = 23;
-        String[] multiArgs = { Integer.toString(expectedValue), "42" };
+        String[] multiArgs = {Integer.toString(expectedValue), "42"};
 
         int actualValue = NumberHelper.getNumberFromFirstArgument(multiArgs);
 

@@ -1,16 +1,34 @@
 package net.h0lg.java.tests.number2words.helper;
 
+import net.h0lg.java.tests.number2words.BoundaryChecker;
 import net.h0lg.java.tests.number2words.transform.NumberPartIdentifiers;
 
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by holgersteinhauer on 05/07/15.
+ * This helper provides static methods to deal with number related tasks.
  */
 public class NumberHelper {
 
+    /**
+     * Splits a given number into three parts:
+     *   * Millions - the three leading digits
+     *   * Hundred thousands - the three middle digits
+     *   * Thousands - the three digits at the rear
+     * Numbers between 1 and 999999999 (@see BoundaryCheck.LOWER_BOUNDARY and BoundaryCheck.UPPER_BOUNDARY)
+     * are supported.
+     * The result is a map, with the corresponding NumberPartIdentifiers element as key and the
+     * digits as value.
+     * If the given number is lower than a million or a thousand, the parts for million and / or
+     * hundred thousands will be 0.
+     *
+     * @param number Number you want the parts for
+     * @return Map with parts
+     */
     public static Map<NumberPartIdentifiers, Integer> splitIntoParts(int number) {
+        BoundaryChecker.checkBoundaries(number);
+
         String numberAsZeroPaddedString = StringFormatHelper.zeroPadNumber(number);
 
         Integer thousands = getThousandsFromNumberString(numberAsZeroPaddedString);
