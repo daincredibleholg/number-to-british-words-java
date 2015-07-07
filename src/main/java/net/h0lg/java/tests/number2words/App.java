@@ -1,6 +1,9 @@
 package net.h0lg.java.tests.number2words;
 
 
+import net.h0lg.java.tests.number2words.helper.NumberHelper;
+import net.h0lg.java.tests.number2words.transform.Number2WordsConverter;
+
 /**
  * This class is just the entry point for the application
  *
@@ -23,16 +26,9 @@ public class App
     }
 
     private void convertNumberFromArgs(String[] args) {
-        int givenNumber = getNumberFromArguments(args);
-    }
-
-    private int getNumberFromArguments(String[] args) {
-        int number = 0;
-        if (args != null && args.length > 0) {
-            number = Integer.parseInt(args[0]);
-        }
-
-        return number;
+        int givenNumber = NumberHelper.getNumberFromFirstArgument(args);
+        String representation = Number2WordsConverter.convert(givenNumber);
+        System.out.println(representation);
     }
 
     private void showUsage() {
@@ -62,7 +58,7 @@ public class App
         boolean result = true;
 
         try {
-            int argumentAsInteger = Integer.parseInt(args[0]);
+            int argumentAsInteger = NumberHelper.getNumberFromFirstArgument(args);
             BoundaryChecker.checkBoundaries(argumentAsInteger);
         } catch (IllegalArgumentException e) {
             result = false;
@@ -75,7 +71,7 @@ public class App
         boolean result = true;
 
         try {
-            int argumentAsInteger = Integer.parseInt(args[0]);
+            NumberHelper.getNumberFromFirstArgument(args);
         } catch (NumberFormatException e) {
             result = false;
         }
