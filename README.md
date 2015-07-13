@@ -21,6 +21,13 @@ To get this project up and running, simply clone the repository, let Maven build
 mvn clean package
 ```
 
+If you interested in the tests, run the following command:
+```
+mvn clean verify
+```
+
+This will execute all unit tests and the integration tests.
+
 # Usage
 Maven will create the file _number2words.jar_ in the target directory. This is the program, simply do:
 

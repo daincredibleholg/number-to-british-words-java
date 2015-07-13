@@ -40,7 +40,7 @@ public class App
     private void showUsage() {
         StringBuilder usageMsg = new StringBuilder();
 
-        usageMsg.append("This program converts numbers between ")
+        usageMsg.append("Usage: This program converts numbers between ")
                 .append(BoundaryChecker.LOWER_BOUNDARY + 1)
                 .append(" and ")
                 .append(BoundaryChecker.UPPER_BOUNDARY)
